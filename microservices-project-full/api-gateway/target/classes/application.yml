@@ -1,0 +1,20 @@
+
+server:
+  port: 5000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+
+        - id: auth
+          uri: http://localhost:5001
+          predicates:
+            - Path=/auth/**
+
+        - id: product
+          uri: http://localhost:5002
+          predicates:
+            - Path=/products/**
+          filters:
+            - JwtAuthFilter
